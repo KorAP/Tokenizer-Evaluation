@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bba852a7_134574d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-02-27T14:23:58Z",
+      "side": 1,
+      "message": "Ich habe mal ein Dockerfile für die Evaluationssuite aufgesetzt. Es sind noch nicht alle tools - aber das hat schon lang genug gedauert. Es scheint aber auf Debian-Basis zu funktionieren (nachdem ich das ganze wie immer auf Alpine versuchte aufzusetzen). Wäre super, wenn es so auch auf einem der Worker laufen könnte. Meine idee wäre jetzt, ein Image mit allen Tools aufzusetzen und die Evaluationsskripte für die Läufe direkt im Container zu mounten. dann wäre das zwar keine direkte \"1-Click-Reproducibility\", aber wir könnten flexibler mit den Korpora arbeiten und schneller mal etwas durchtesten. Aktuell ist Datok in einem ziemlich niedrigen Layer - das war zugegebenermaßen dumm. Ich würde KorAP-Tokenizer und Datok am Ende auf die höchsten Ebenen setzen, damit wir auf Basis der Evaluationen noch Verbesserungen durchführen können.",
+      "revId": "5af0abd004499bbc22e23d0ebbada44374b9bb88",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
