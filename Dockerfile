@@ -6,8 +6,10 @@ RUN echo "Dies ist ein Test. Also, nur ein Beispiel." > example.txt
 
 RUN apt-get update && \
     apt-get install -y git \
-    perl
-
+    wget \
+    unzip \
+    perl \
+    golang
 
 ############
 # Check WC #
@@ -18,27 +20,12 @@ RUN echo "WC\n" && wc -w ./example.txt
 ##################
 # Install SoMaJo #
 ##################
-RUN apt-get install -y \
-    python3-dev \
+RUN apt-get install -y python3-dev \
     python3 \
-    python3-pip
-
-RUN pip3 install SoMaJo
+    python3-pip && \
+    pip3 install SoMaJo
 
 RUN echo "SOMAJO\n" && somajo-tokenizer --split_sentences ./example.txt
-
-###################
-# Install Datok #
-###################
-RUN apt-get install -y golang wget unzip && \
-    wget https://github.com/KorAP/Datok/archive/refs/tags/v0.1.1.zip && \
-    unzip v0.1.1.zip && \
-    rm v0.1.1.zip && \
-    mv Datok-0.1.1 Datok && \
-    cd Datok && \
-    go build ./cmd/datok.go
-
-RUN echo "DATOK\n" && cat example.txt | ./Datok/datok tokenize -t ./Datok/testdata/tokenizer.matok -
 
 
 ###################
@@ -90,9 +77,11 @@ RUN wget https://github.com/dbmdz/deep-eos/archive/refs/tags/v0.1.zip && \
     wget https://github.com/dbmdz/deep-eos/releases/download/v0.1/lstm-de.vocab
 
 RUN pip3 install --upgrade pip && \
-    pip3 install --upgrade tensorflow && \
-    pip3 install keras && \
-    sed -i 's/from keras.utils import plot_model/from tensorflow.keras.utils import plot_model/' ./deep-eos/eos.py
+    pip3 install --upgrade tensorflow
+
+RUN pip3 install keras
+
+RUN sed -i 's/from keras.utils import plot_model/from tensorflow.keras.utils import plot_model/' ./deep-eos/eos.py
 
 RUN echo "deep-eos (1)" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/cnn-de.model --vocab-filename ./deep-eos/cnn-de.vocab --eos-marker "§" tag
 
@@ -100,6 +89,19 @@ RUN echo "deep-eos (2)" && python3 ./deep-eos/main.py --input-file example.txt -
 
 RUN echo "deep-eos (3)" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/lstm-de.model --vocab-filename ./deep-eos/lstm-de.vocab --eos-marker "§" tag
 
+
+###################
+# Install Datok #
+###################
+
+RUN wget https://github.com/KorAP/Datok/archive/refs/tags/v0.1.1.zip && \
+    unzip v0.1.1.zip && \
+    rm v0.1.1.zip && \
+    mv Datok-0.1.1 Datok && \
+    cd Datok && \
+    go build ./cmd/datok.go
+
+RUN echo "DATOK\n" && cat example.txt | ./Datok/datok tokenize -t ./Datok/testdata/tokenizer.matok -
 
 ENTRYPOINT [ "sh" ]
 
