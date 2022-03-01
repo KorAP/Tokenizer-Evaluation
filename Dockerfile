@@ -31,7 +31,7 @@ RUN echo "SOMAJO\n" && somajo-tokenizer --split_sentences ./example.txt
 ###################
 # Install OpenNLP #
 ###################
-RUN apt-get install -y openjdk-11-jre
+RUN apt-get install -y openjdk-11-jdk
 
 RUN wget https://dlcdn.apache.org/opennlp/opennlp-1.9.4/apache-opennlp-1.9.4-bin.zip && \
     unzip apache-opennlp-1.9.4-bin.zip -x apache-opennlp-1.9.4/docs/* && \
@@ -88,6 +88,27 @@ RUN echo "deep-eos (1)" && python3 ./deep-eos/main.py --input-file example.txt -
 RUN echo "deep-eos (2)" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/bi-lstm-de.model --vocab-filename ./deep-eos/bi-lstm-de.vocab --eos-marker "§" tag
 
 RUN echo "deep-eos (3)" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/lstm-de.model --vocab-filename ./deep-eos/lstm-de.vocab --eos-marker "§" tag
+
+
+################
+# Install JTok #
+################
+
+RUN apt-get install -y maven
+
+RUN wget https://github.com/DFKI-MLT/JTok/archive/refs/tags/v2.1.19.zip && \
+    unzip v2.1.19.zip && \
+    rm v2.1.19.zip && \
+    cd JTok-2.1.19 && \
+    JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 mvn clean package assembly:single && \
+    cd .. && \
+    unzip ./JTok-2.1.19/target/jtok-core-2.1.19-bin.zip && \
+    rm -r JTok-2.1.19 && \
+    mv jtok-core-2.1.19 JTok
+
+RUN echo "JTok" && \
+    cd ./JTok/bin && \
+    sh tokenize /euralex/example.txt de
 
 
 ###################
