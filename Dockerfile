@@ -111,6 +111,16 @@ RUN echo "JTok\n" && \
     sh tokenize /euralex/example.txt de
 
 
+##################
+# Install Syntok #
+##################
+RUN pip3 install syntok==1.4.3
+
+RUN echo "Syntok (1)\n" && python3 -m syntok.tokenizer ./example.txt
+
+RUN echo "Syntok (2)\n" && python3 -m syntok.segmenter ./example.txt
+
+
 #################
 # Install Datok #
 #################
