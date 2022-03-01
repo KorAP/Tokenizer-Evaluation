@@ -1,0 +1,13 @@
+[package]
+name = "nnsplit_bench"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+
+[dependencies.load_file]
+version = "1.0.1"
+
+[dependencies.nnsplit]
+version = "0.5.8"
+features = ["model-loader", "tract-backend"]

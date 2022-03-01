@@ -141,6 +141,24 @@ RUN cd ./Waste/moot-2.0.20-1 && \
 RUN echo "Waste\n" && cat ./example.txt | waste -N --rcfile=./Waste/waste.rc
 
 
+###################
+# Install nnsplit #
+###################
+
+COPY nnsplit_bench /euralex/nnsplit_bench/
+
+RUN apt-get install -y cargo
+
+RUN cd ./nnsplit_bench && \
+    cargo build --release
+
+RUN mkdir ./nnsplit && \
+    mv ./nnsplit_bench/target/release/nnsplit_bench ./nnsplit/nnsplit_bench && \
+    rm -r ./nnsplit_bench/target
+
+RUN echo "nnsplit\n" && ./nnsplit/nnsplit_bench example.txt
+
+
 #################
 # Install Datok #
 #################
