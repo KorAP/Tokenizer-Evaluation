@@ -158,6 +158,29 @@ RUN mkdir ./nnsplit && \
 
 RUN echo "nnsplit\n" && ./nnsplit/nnsplit_bench example.txt
 
+####################
+# Install Elephant #
+####################
+
+RUN apt-get install -y python2
+
+RUN ln -s /usr/bin/python2 /usr/bin/python
+
+RUN git clone https://github.com/erwanm/elephant-wrapper.git && \
+    cd elephant-wrapper/third-party && \
+    git clone https://github.com/ParallelMeaningBank/elephant.git && \
+    git clone https://github.com/Jekub/Wapiti.git && \
+    git clone https://github.com/mspandit/rnnlm.git
+
+RUN cd elephant-wrapper && \
+    make && \
+    make install && \
+    cd .. && \
+    mv ./elephant-wrapper/bin/elephant /usr/local/bin/ && \
+    mv ./elephant-wrapper/bin/wapiti /usr/local/bin/
+
+RUN echo "Elephant-Wrapper" && ./elephant-wrapper/bin/tokenize.sh -i example.txt UD_German
+
 
 #################
 # Install Datok #
