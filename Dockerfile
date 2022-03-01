@@ -122,6 +122,26 @@ RUN echo "Syntok (2)\n" && python3 -m syntok.segmenter ./example.txt
 
 
 #################
+# Install Waste #
+#################
+RUN mkdir Waste && \
+    cd Waste && \
+    wget https://cudmuncher.de/~moocow/mirror/projects/moot/moot-2.0.20-1.tar.gz && \
+    wget https://kaskade.dwds.de/waste/waste-models/waste-data.de-dstar-tiger.tar.gz && \
+    tar -xvzf moot-2.0.20-1.tar.gz && \
+    tar -xvzf waste-data.de-dstar-tiger.tar.gz
+    
+RUN cd ./Waste/moot-2.0.20-1 && \
+    ./configure && \
+    make && \
+    make install && \
+    ldconfig && \
+    echo "abbrevs /euralex/Waste/de-dstar-dtiger/abbr.lex\nstopwords /euralex/Waste/de-dstar-dtiger/stop.lex\nconjunctions /euralex/Waste/de-dstar-dtiger/conj.lex\nmodel /euralex/Waste/de-dstar-dtiger/model.hmm" > /euralex/Waste/waste.rc
+
+RUN echo "Waste\n" && cat ./example.txt | waste -N --rcfile=./Waste/waste.rc
+
+
+#################
 # Install Datok #
 #################
 
@@ -133,7 +153,6 @@ RUN wget https://github.com/KorAP/Datok/archive/refs/tags/v0.1.1.zip && \
     go build ./cmd/datok.go
 
 RUN echo "DATOK\n" && cat example.txt | ./Datok/datok tokenize -t ./Datok/testdata/tokenizer.matok -
-
 
 
 ###########################
