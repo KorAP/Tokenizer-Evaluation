@@ -43,11 +43,11 @@ RUN wget https://dlcdn.apache.org/opennlp/opennlp-1.9.4/apache-opennlp-1.9.4-bin
     mv opennlp-de-ud-gsd-sentence-1.0-1.9.3.bin ./opennlp/models/ && \
     mv opennlp-de-ud-gsd-tokens-1.0-1.9.3.bin ./opennlp/models/
 
-RUN echo "OpenNLP (1)" && cat example.txt | ./opennlp/bin/opennlp SimpleTokenizer 
+RUN echo "OpenNLP (1)\n" && cat example.txt | ./opennlp/bin/opennlp SimpleTokenizer 
 
-RUN echo "OpenNLP (2)" && cat example.txt | ./opennlp/bin/opennlp TokenizerME ./opennlp/models/opennlp-de-ud-gsd-tokens-1.0-1.9.3.bin
+RUN echo "OpenNLP (2)\n" && cat example.txt | ./opennlp/bin/opennlp TokenizerME ./opennlp/models/opennlp-de-ud-gsd-tokens-1.0-1.9.3.bin
 
-RUN echo "OpenNLP (3)" && cat example.txt | ./opennlp/bin/opennlp SentenceDetector ./opennlp/models/opennlp-de-ud-gsd-sentence-1.0-1.9.3.bin
+RUN echo "OpenNLP (3)\n" && cat example.txt | ./opennlp/bin/opennlp SentenceDetector ./opennlp/models/opennlp-de-ud-gsd-sentence-1.0-1.9.3.bin
 
 
 ######################
@@ -59,7 +59,7 @@ RUN mkdir ./treetagger && \
     tar -xvzf tagger-scripts.tar.gz && \
     rm tagger-scripts.tar.gz
 
-RUN echo "TreeTagger" && cat example.txt | ./treetagger/cmd/utf8-tokenize.perl -a ./treetagger/lib/german-abbreviations
+RUN echo "TreeTagger\n" && cat example.txt | ./treetagger/cmd/utf8-tokenize.perl -a ./treetagger/lib/german-abbreviations
 
 
 ####################
@@ -83,11 +83,11 @@ RUN pip3 install keras
 
 RUN sed -i 's/from keras.utils import plot_model/from tensorflow.keras.utils import plot_model/' ./deep-eos/eos.py
 
-RUN echo "deep-eos (1)" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/cnn-de.model --vocab-filename ./deep-eos/cnn-de.vocab --eos-marker "§" tag
+RUN echo "deep-eos (1)\n" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/cnn-de.model --vocab-filename ./deep-eos/cnn-de.vocab --eos-marker "§" tag
 
-RUN echo "deep-eos (2)" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/bi-lstm-de.model --vocab-filename ./deep-eos/bi-lstm-de.vocab --eos-marker "§" tag
+RUN echo "deep-eos (2)\n" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/bi-lstm-de.model --vocab-filename ./deep-eos/bi-lstm-de.vocab --eos-marker "§" tag
 
-RUN echo "deep-eos (3)" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/lstm-de.model --vocab-filename ./deep-eos/lstm-de.vocab --eos-marker "§" tag
+RUN echo "deep-eos (3)\n" && python3 ./deep-eos/main.py --input-file example.txt --model-filename ./deep-eos/lstm-de.model --vocab-filename ./deep-eos/lstm-de.vocab --eos-marker "§" tag
 
 
 ################
@@ -106,14 +106,14 @@ RUN wget https://github.com/DFKI-MLT/JTok/archive/refs/tags/v2.1.19.zip && \
     rm -r JTok-2.1.19 && \
     mv jtok-core-2.1.19 JTok
 
-RUN echo "JTok" && \
+RUN echo "JTok\n" && \
     cd ./JTok/bin && \
     sh tokenize /euralex/example.txt de
 
 
-###################
+#################
 # Install Datok #
-###################
+#################
 
 RUN wget https://github.com/KorAP/Datok/archive/refs/tags/v0.1.1.zip && \
     unzip v0.1.1.zip && \
@@ -123,6 +123,20 @@ RUN wget https://github.com/KorAP/Datok/archive/refs/tags/v0.1.1.zip && \
     go build ./cmd/datok.go
 
 RUN echo "DATOK\n" && cat example.txt | ./Datok/datok tokenize -t ./Datok/testdata/tokenizer.matok -
+
+
+
+###########################
+# Install KorAP-Tokenizer #
+###########################
+
+RUN mkdir KorAP-Tokenizer && \
+    cd KorAP-Tokenizer && \
+    wget https://github.com/KorAP/KorAP-Tokenizer/releases/download/v2.2.2/KorAP-Tokenizer-2.2.2-standalone.jar && \
+    mv KorAP-Tokenizer-2.2.2-standalone.jar KorAP-Tokenizer.jar
+
+RUN echo "KorAP-Tokenizer\n" && cat example.txt | java -jar KorAP-Tokenizer/KorAP-Tokenizer.jar -l de -s -
+
 
 ENTRYPOINT [ "sh" ]
 
