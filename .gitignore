@@ -1,5 +1,6 @@
 /sandbox
 /Sandbox
+/corpus/*.txt
 \#*
 *~
 .*

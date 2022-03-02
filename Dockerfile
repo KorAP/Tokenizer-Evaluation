@@ -183,6 +183,17 @@ RUN echo "Elephant-Wrapper" && ./elephant-wrapper/bin/tokenize.sh -i example.txt
 
 
 #################
+# Install SpaCy #
+#################
+
+RUN pip3 install -U spacy
+
+COPY spacy /euralex/spacy/
+
+RUN echo "SpaCy" && python3 ./spacy/spacy_tok.py example.txt
+
+
+#################
 # Install Datok #
 #################
 
@@ -207,6 +218,17 @@ RUN mkdir KorAP-Tokenizer && \
 
 RUN echo "KorAP-Tokenizer\n" && cat example.txt | java -jar KorAP-Tokenizer/KorAP-Tokenizer.jar -l de -s -
 
+
+RUN useradd -ms /bin/bash euralex
+
+RUN rm -r ./nnsplit_bench && \
+    rm /euralex/v0.1.zip
+
+RUN chown euralex:euralex -R /euralex/treetagger
+
+USER euralex
+
+WORKDIR /euralex
 
 ENTRYPOINT [ "sh" ]
 
