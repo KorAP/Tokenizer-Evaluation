@@ -68,7 +68,7 @@ my $models = {
     system 'python3 -m syntok.segmenter ./corpus/'.$FILE.' > /dev/null';
   },
   Waste => sub {
-    system 'cat ./corpus/'.$FILE.' | waste -N --rcfile=./Waste/waste.rc > /dev/null';
+    system 'cat ./corpus/'.$FILE.' | waste -N -v0 --rcfile=./Waste/waste.rc > /dev/null';
   },
   nnsplit => sub {
     system './nnsplit/nnsplit_bench ./corpus/'.$FILE.' > /dev/null'
