@@ -224,13 +224,13 @@ RUN useradd -ms /bin/bash euralex
 RUN rm -r ./nnsplit_bench && \
     rm /euralex/v0.1.zip
 
-RUN chown euralex:euralex -R /euralex/treetagger
+RUN chown euralex:euralex -R /euralex
 
 USER euralex
 
 WORKDIR /euralex
 
-ENTRYPOINT [ "sh" ]
+ENTRYPOINT [ "perl" ]
 
 LABEL maintainer="korap@ids-mannheim.de"
 LABEL description="Tokenizer evaluation for EURALEX"

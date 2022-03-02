@@ -1,11 +1,11 @@
-# Running the evaluation suite
+# Creating the container
 
 To build the Docker image, run
 
 ```shell
-$ docker build -f Dockerfile -t korap/euralex .
+$ docker build -f Dockerfile -t korap/euralex22 .
 ```
-This will download and install an image of approximately 4GB.
+This will download and install an image of approximately 6GB.
 
 It will download and install the following
 tokenizers in an image to your system:
@@ -15,6 +15,19 @@ tokenizers in an image to your system:
 To run the evaluation suite ...
 
 ...
+
+
+# Running the evaluation suite
+
+To run the benchmark, call
+
+```shell
+$ docker run --rm -it \
+  -v ${PWD}/benchmarks:/euralex/benchmarks \
+  -v ${PWD}/corpus:/euralex/corpus \
+  korap/euralex22 benchmarks/benchmark.pl
+```
+
 
 # Licenses
 
