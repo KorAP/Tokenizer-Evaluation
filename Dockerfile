@@ -193,6 +193,28 @@ COPY spacy /euralex/spacy/
 RUN echo "SpaCy" && python3 ./spacy/spacy_tok.py example.txt
 
 
+###########################
+# Install Stanford parser #
+###########################
+
+# Following https://stanfordnlp.github.io/CoreNLP/index.html
+
+RUN wget https://nlp.stanford.edu/software/stanford-corenlp-latest.zip
+
+RUN wget https://search.maven.org/remotecontent?filepath=edu/stanford/nlp/stanford-corenlp/4.4.0/stanford-corenlp-4.4.0-models-german.jar -O stanford-corenlp-4.4.0-models-german.jar
+
+RUN unzip stanford-corenlp-latest.zip && \
+    rm stanford-corenlp-latest.zip && \
+    mv stanford-corenlp-4.4.0-models-german.jar stanford-corenlp-4.4.0/
+
+# Run with threads!
+RUN echo "StanfordNLP" && \
+    CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP \
+    -annotators tokenize \
+    -tokenize.language=german \
+    -file example.txt
+
+
 #################
 # Install Datok #
 #################

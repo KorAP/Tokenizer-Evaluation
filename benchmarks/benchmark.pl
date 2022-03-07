@@ -78,6 +78,14 @@ my $models = {
   },
   SpaCy => sub {
     system 'python3 ./spacy/spacy_tok.py ./corpus/'.$FILE.' > /dev/null'
+  },
+  Stanford => sub {
+    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+      '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -file ./corpus/' . $FILE
+  },
+  Stanford_t4 => sub {
+    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+      '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -threads=4 -file ./corpus/' . $FILE
   }
 };
 
@@ -100,6 +108,8 @@ my $models = {
 #delete $models->{'nnsplit'};
 #delete $models->{'elephant'};
 #delete $models->{'SpaCy'};
+#delete $models->{'Stanford'};
+#delete $models->{'Stanford_t4'};
 
 
 my $t0 = Benchmark->new;
