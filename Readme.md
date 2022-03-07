@@ -50,7 +50,26 @@ $ wget https://sites.google.com/site/empirist2015/home/shared-task-data/empirist
 $ unzip empirist_gold_web.zip -d corpus
 ```
 
+To run the evaluation using the measurement tools provided by EmpiriST 2015,
+run
+
+```shell
+$ docker run --rm -it \
+  -v ${PWD}/benchmarks:/euralex/benchmarks \
+  -v ${PWD}/corpus:/euralex/corpus \
+  korap/euralex2 benchmarks/empirist.pl
+```
+
+
 Quality measurements based on EmpiriST 2015.
+
+To investigate the output, start the benchmark with mounted
+output folders
+
+```
+-v ${PWD}/output_cmc:/euralex/empirist_cmc
+-v ${PWD}/output_web:/euralex/empirist_web
+```
 
 
 # Tools
