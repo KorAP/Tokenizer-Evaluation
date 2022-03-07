@@ -60,16 +60,16 @@ my %tools = (
   }
 );
 
-# delete $tools{waste};
-# delete $tools{datok};
-# delete $tools{korap_tokenizer};
-# delete $tools{opennlp_simple};
-# delete $tools{opennlp_tokenizer};
-# delete $tools{tree_tagger};
-# delete $tools{jtok};
-# delete $tools{syntok};
-# delete $tools{somajo};
-# delete $tools{stanford};
+#delete $tools{waste};
+#delete $tools{datok};
+#delete $tools{korap_tokenizer};
+#delete $tools{opennlp_simple};
+#delete $tools{opennlp_tokenizer};
+#delete $tools{tree_tagger};
+#delete $tools{jtok};
+#delete $tools{syntok};
+#delete $tools{somajo};
+#delete $tools{stanford};
 
 # Create project folders
 foreach (keys %tools) {

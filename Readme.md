@@ -22,7 +22,7 @@ To run the evaluation suite ...
 To run the benchmark, call
 
 ```shell
-$ docker run --rm -it \
+$ docker run --rm -i \
   -v ${PWD}/benchmarks:/euralex/benchmarks \
   -v ${PWD}/corpus:/euralex/corpus \
   korap/euralex22 benchmarks/[BENCHMARK-SCRIPT]
@@ -38,8 +38,8 @@ remarks to take into account.
 
 ## `empirist.pl`
 
-To run the empirist test suite, you need to download the empirist
-gold standard corpus and tooling first and extract it into
+To run the empirist evaluation suite, you first need to download
+the empirist gold standard corpus and tooling, and extract it into
 the corpus directory.
 
 ```shell
@@ -50,17 +50,6 @@ $ wget https://sites.google.com/site/empirist2015/home/shared-task-data/empirist
 $ unzip empirist_gold_web.zip -d corpus
 ```
 
-To run the evaluation using the measurement tools provided by EmpiriST 2015,
-run
-
-```shell
-$ docker run --rm -it \
-  -v ${PWD}/benchmarks:/euralex/benchmarks \
-  -v ${PWD}/corpus:/euralex/corpus \
-  korap/euralex2 benchmarks/empirist.pl
-```
-
-
 Quality measurements based on EmpiriST 2015.
 
 To investigate the output, start the benchmark with mounted
@@ -69,6 +58,26 @@ output folders
 ```
 -v ${PWD}/output_cmc:/euralex/empirist_cmc
 -v ${PWD}/output_web:/euralex/empirist_web
+```
+
+## `ud-tokens.pl`
+
+To run the evaluation suite against the 
+[Universal Dependency](https://github.com/UniversalDependencies/UD_German-GSD)
+corpus, first install the empirist tooling as explained above,
+and download the corpus.
+
+```shell
+$ wget https://github.com/UniversalDependencies/UD_German-GSD/raw/master/de_gsd-ud-train.conllu \
+  -O corpus/de_gsd-ud-train.conllu
+```
+
+
+```shell
+$ docker run --rm -it \
+  -v ${PWD}/benchmarks:/euralex/benchmarks \
+  -v ${PWD}/corpus:/euralex/corpus \
+  korap/euralex2 benchmarks/empirist.pl
 ```
 
 

@@ -1,4 +1,5 @@
 /corpus/empirist_*
+/corpus/de_*-ud-train*
 /sandbox
 /Sandbox
 /corpus/*.txt
