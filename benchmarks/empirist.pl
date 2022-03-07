@@ -50,18 +50,26 @@ my %tools = (
   somajo => sub {
     my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
     system 'somajo-tokenizer ' . $raw . ' 2> /dev/null > ' . $empirist_path . $_[1] . '/somajo/' . $_[0];
+  },
+  stanford => sub {
+    my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
+    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+      '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -file ' . $raw . ' 2> /dev/null';
+    system 'perl /euralex/benchmarks/cleanup/stanford.pl ' . $_[0] . '.out > ' . $empirist_path . $_[1] . '/stanford/' . $_[0];
+    system 'rm ' . $_[0] . '.out';
   }
 );
 
-#delete $tools{waste};
-#delete $tools{datok};
-#delete $tools{korap_tokenizer};
-#delete $tools{opennlp_simple};
-#delete $tools{opennlp_tokenizer};
-#delete $tools{tree_tagger};
-#delete $tools{jtok};
-#delete $tools{syntok};
-#delete $tools{somajo};
+# delete $tools{waste};
+# delete $tools{datok};
+# delete $tools{korap_tokenizer};
+# delete $tools{opennlp_simple};
+# delete $tools{opennlp_tokenizer};
+# delete $tools{tree_tagger};
+# delete $tools{jtok};
+# delete $tools{syntok};
+# delete $tools{somajo};
+# delete $tools{stanford};
 
 # Create project folders
 foreach (keys %tools) {
