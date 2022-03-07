@@ -25,8 +25,65 @@ To run the benchmark, call
 $ docker run --rm -it \
   -v ${PWD}/benchmarks:/euralex/benchmarks \
   -v ${PWD}/corpus:/euralex/corpus \
-  korap/euralex22 benchmarks/benchmark.pl
+  korap/euralex22 benchmarks/[BENCHMARK-SCRIPT]
 ```
+
+The supported benchmark scripts are:
+
+## `benchmark.pl`
+
+Performance measurements of the tools. See the tools section for some
+remarks to take into account.
+
+
+## `empirist.pl`
+
+To run the empirist test suite, you need to download the empirist
+gold standard corpus and tooling first and extract it into
+the corpus directory.
+
+```shell
+$ wget https://sites.google.com/site/empirist2015/home/shared-task-data/empirist_gold_cmc.zip
+$ unzip empirist_gold_cmc.zip -d corpus
+
+$ wget https://sites.google.com/site/empirist2015/home/shared-task-data/empirist_gold_web.zip
+$ unzip empirist_gold_web.zip -d corpus
+```
+
+Quality measurements based on EmpiriST 2015.
+
+
+# Tools
+
+## Waste
+- Tokenization
+
+## OpenNLP
+- Tokenization
+
+## TreeTagger
+- Tokenization
+
+## JTok
+- Tokenization
+
+## SynTok
+- Tokenization
+
+## SoMaJo
+- Tokenization
+
+## Stanford CoreNLP
+- Tokenization
+
+All tools are run using [pipelining](https://stanfordnlp.github.io/CoreNLP/pipeline.html),
+which obviously introduces some overhead, that needs to be taken into account.
+
+## KorAP-Tokenizer
+- Tokenization + Sentence Splitting
+
+## Datok
+- Tokenization + Sentence Splitting
 
 
 # Licenses
@@ -46,3 +103,5 @@ to run all processes privileged to get
 ```shell
 docker run --privileged -v
 ```
+
+# Literature
