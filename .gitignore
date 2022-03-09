@@ -2,6 +2,7 @@
 /corpus/de_*-ud-train*
 /sandbox
 /Sandbox
+/output_*
 /corpus/*.txt
 \#*
 *~

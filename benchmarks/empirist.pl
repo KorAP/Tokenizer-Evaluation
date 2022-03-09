@@ -51,6 +51,14 @@ my %tools = (
     my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
     system 'somajo-tokenizer ' . $raw . ' 2> /dev/null > ' . $empirist_path . $_[1] . '/somajo/' . $_[0];
   },
+  elephant => sub {
+    my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
+    system './elephant-wrapper/bin/tokenize.sh -i ' . $raw . ' UD_German | sed "s/\s/\n/g" > ' . $empirist_path . $_[1] . '/elephant/' . $_[0];
+  },
+  spacy => sub {
+    my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
+    system 'python3 ./spacy/spacy_tok.py ' . $raw . ' > ' . $empirist_path . $_[1] . '/spacy/' . $_[0];
+  },
   stanford => sub {
     my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
     system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
@@ -60,20 +68,24 @@ my %tools = (
   }
 );
 
-#delete $tools{waste};
-#delete $tools{datok};
-#delete $tools{korap_tokenizer};
-#delete $tools{opennlp_simple};
-#delete $tools{opennlp_tokenizer};
-#delete $tools{tree_tagger};
-#delete $tools{jtok};
-#delete $tools{syntok};
-#delete $tools{somajo};
-#delete $tools{stanford};
+# delete $tools{waste};
+# delete $tools{datok};
+# delete $tools{korap_tokenizer};
+# delete $tools{opennlp_simple};
+# delete $tools{opennlp_tokenizer};
+# delete $tools{tree_tagger};
+# delete $tools{jtok};
+# delete $tools{syntok};
+# delete $tools{somajo};
+# delete $tools{stanford};
+# delete $tools{spacy};
+# delete $tools{elephant};
 
 # Create project folders
 foreach (keys %tools) {
+  system 'rm -r ' . $empirist_path . 'cmc/' . $_;
   mkdir $empirist_path . 'cmc/' . $_;
+  system 'rm -r ' . $empirist_path . 'web/' . $_;
   mkdir $empirist_path . 'web/' . $_;
 };
 

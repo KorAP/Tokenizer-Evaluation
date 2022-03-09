@@ -46,6 +46,12 @@ my %tools = (
   syntok => sub {
     system 'python3 -m syntok.tokenizer ' . $raw . ' | sed "s/\s/\n/g" > ' . $ud_path . '/syntok/' . $base;
   },
+  elephant => sub {
+    system './elephant-wrapper/bin/tokenize.sh -i ' . $raw . ' UD_German | sed "s/\s/\n/g" > ' . $ud_path . '/elephant/' . $base;
+  },
+  spacy => sub {
+    system 'python3 ./spacy/spacy_tok.py ' . $raw . ' > ' . $ud_path . '/spacy/' . $base;
+  },
   somajo => sub {
     system 'somajo-tokenizer ' . $raw . ' 2> /dev/null > ' . $ud_path . '/somajo/' . $base;
   },
@@ -57,16 +63,18 @@ my %tools = (
   }
 );
 
-# delete $tools{waste};
-# delete $tools{datok};
-# delete $tools{korap_tokenizer};
-# delete $tools{opennlp_simple};
-# delete $tools{opennlp_tokenizer};
-# delete $tools{tree_tagger};
-# delete $tools{jtok};
-# delete $tools{syntok};
-# delete $tools{somajo};
-# delete $tools{stanford};
+ delete $tools{waste};
+ delete $tools{datok};
+ delete $tools{korap_tokenizer};
+ delete $tools{opennlp_simple};
+ delete $tools{opennlp_tokenizer};
+ delete $tools{tree_tagger};
+ delete $tools{jtok};
+ delete $tools{syntok};
+ delete $tools{somajo};
+ delete $tools{stanford};
+# delete $tools{elephant};
+# delete $tools{spacy};
 
 # Create project folders
 foreach (keys %tools) {
