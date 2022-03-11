@@ -5,11 +5,27 @@ use Benchmark qw!:hireswallclock :all!;
 use Data::Dumper;
 use POSIX 'round';
 
+our @ARGV;
+
+# The first parameter is the batch size (how often is the text concatenated)
+# The second parameter is the number of iterations.
+
 my $FILE = 'effi-1x-utf8.txt';
-
 system 'gzip -dkf ./corpus/' . $FILE . '.gz';
-
 my $iter = 1;
+
+if ($ARGV[0]) {
+  my $number = $ARGV[0] + 0;
+  my $out = 'effi-'.$number.'x-utf8.txt';
+  for (my $i = 1; $i <= $number; $i++) {
+    system 'cat ./corpus/' . $FILE . ' >> ./corpus/' . $out;
+  };
+  $FILE = $out;
+};
+
+if ($ARGV[1]) {
+  $iter = $ARGV[1] + 0;
+};
 
 # Result of wc -w
 my $effi_wc = `wc -w ./corpus/$FILE`;
@@ -25,6 +41,12 @@ my $models = {
   },
   'SoMaJo_p2' => sub {
     system 'somajo-tokenizer ./corpus/'.$FILE.' --parallel=2 --split_sentences > /dev/null';
+  },
+  'SoMaJo_p4' => sub {
+    system 'somajo-tokenizer ./corpus/'.$FILE.' --parallel=4 --split_sentences > /dev/null';
+  },
+  'SoMaJo_p8' => sub {
+    system 'somajo-tokenizer ./corpus/'.$FILE.' --parallel=8 --split_sentences > /dev/null';
   },
   'Datok_matok' => sub {
     system 'cat ./corpus/'.$FILE.' | ./Datok/datok tokenize -t ./Datok/testdata/tokenizer.matok - > /dev/null'
@@ -83,14 +105,24 @@ my $models = {
     system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
       '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -file ./corpus/' . $FILE
   },
+  Stanford_t2 => sub {
+    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+      '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -threads=2 -file ./corpus/' . $FILE
+    },
   Stanford_t4 => sub {
     system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
       '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -threads=4 -file ./corpus/' . $FILE
-  }
+    },
+  Stanford_t8 => sub {
+    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+      '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -threads=8 -file ./corpus/' . $FILE
+    }
 };
 
 #delete $models->{'SoMaJo'};
 #delete $models->{'SoMaJo_p2'};
+#delete $models->{'SoMaJo_p4'};
+#delete $models->{'SoMaJo_p8'};
 #delete $models->{'Datok_matok'};
 #delete $models->{'Datok_datok'};
 #delete $models->{'OpenNLP_Simple'};
@@ -109,7 +141,9 @@ my $models = {
 #delete $models->{'elephant'};
 #delete $models->{'SpaCy'};
 #delete $models->{'Stanford'};
+#delete $models->{'Stanford_t2'};
 #delete $models->{'Stanford_t4'};
+#delete $models->{'Stanford_t8'};
 
 
 my $t0 = Benchmark->new;
