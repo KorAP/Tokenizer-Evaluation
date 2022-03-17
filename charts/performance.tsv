@@ -1,0 +1,27 @@
+Tool	Version	Sen	Tok	Model	Tokens/ms effi1x - 100 runs	Tokens/ms effi10x - 100 runs
+Datok		x	x	datok	837.89	2478.71
+		x	x	matok	1371.19	2976.80
+JTok	2.1.19				31.19	117.22
+KorAP-Tokenizer					72.90	199.28
+OpenNLP	1.9.2004	x		SentenceDetector Sentence_de-ud-gsd	247.84	853.01
+			x	Simple	290.71	1330.23
+			x	TokenizerME Tokenizer_de-ud-gsd	74.65	145.08
+SoMaJo		x	x		8.15	8.41
+		x	x	p=2	11.13	15.06
+		x	x	p=4	19.69	26.64
+		x	x	p=8	27.32	39.91
+SpaCy					19.73	44.40
+Stanford	4.4.2000				46.95	91.56
+				t=2	47.00	91.84
+				t=4	47.46	92.24
+				t=8	47.25	92.23
+Syntok				segmenter	59.66	61.07
+				tokenizer	103.90	108.40
+TreeTagger	3.2.2004				69.92	72.98
+Waste	2.0.20-1	x	x	de-dstar-dtiger	141.07	144.95
+Deep-EOS				bi-lstm-de	0.25	
+				cnn-de	0.27	
+				lstm-de	0.29	
+Elephant					8.57	8.68
+NNsplit					0.90	
+wc					13088.50	14455.86
