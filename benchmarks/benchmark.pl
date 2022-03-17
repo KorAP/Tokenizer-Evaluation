@@ -98,8 +98,20 @@ my $models = {
   elephant => sub {
     system './elephant-wrapper/bin/tokenize.sh -i ./corpus/'.$FILE.' UD_German > /dev/null'
   },
-  SpaCy => sub {
+  cutter => sub {
+    system 'python3 ./cutter/cutter.py nosent ./corpus/'.$FILE.' > /dev/null'
+  },
+  spacy_tok => sub {
     system 'python3 ./spacy/spacy_tok.py ./corpus/'.$FILE.' > /dev/null'
+  },
+  spacy_dep => sub {
+    system 'python3 ./spacy/spacy_sent.py dep ./corpus/'.$FILE.' > /dev/null'
+  },
+  spacy_stat => sub {
+    system 'python3 ./spacy/spacy_sent.py stat ./corpus/'.$FILE.' > /dev/null'
+  },
+  spacy_sentencizer => sub {
+    system 'python3 ./spacy/spacy_sent.py sentencizer ./corpus/'.$FILE.' > /dev/null'
   },
   Stanford => sub {
     system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
@@ -116,7 +128,11 @@ my $models = {
   Stanford_t8 => sub {
     system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
       '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -threads=8 -file ./corpus/' . $FILE
-    }
+    },
+  Stanford_tokonly => sub {
+    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+      '-props german -annotators tokenize -tokenize.language=german -file ./corpus/' . $FILE
+  },
 };
 
 #delete $models->{'SoMaJo'};
@@ -139,11 +155,17 @@ my $models = {
 #delete $models->{'Waste'};
 #delete $models->{'nnsplit'};
 #delete $models->{'elephant'};
-#delete $models->{'SpaCy'};
 #delete $models->{'Stanford'};
 #delete $models->{'Stanford_t2'};
 #delete $models->{'Stanford_t4'};
 #delete $models->{'Stanford_t8'};
+delete $models->{'Stanford_tokonly'};
+delete $models->{'cutter'};
+delete $models->{'spacy_tok'};
+delete $models->{'spacy_sentencizer'};
+delete $models->{'spacy_dep'};
+delete $models->{'spacy_stat'};
+
 
 
 my $t0 = Benchmark->new;

@@ -147,7 +147,7 @@ RUN echo "Waste\n" && cat ./example.txt | waste -N --rcfile=./Waste/waste.rc
 
 COPY nnsplit_bench /euralex/nnsplit_bench/
 
-RUN apt-get install -y cargo
+RUN apt-get update && apt-get install -y cargo
 
 RUN cd ./nnsplit_bench && \
     cargo build --release
@@ -192,6 +192,10 @@ COPY spacy /euralex/spacy/
 
 RUN echo "SpaCy" && python3 ./spacy/spacy_tok.py example.txt
 
+# Sentence splitter
+RUN python3 -m spacy download de_core_news_sm && \
+    python3 -m spacy download de_dep_news_trf
+
 
 ###########################
 # Install Stanford parser #
@@ -213,6 +217,17 @@ RUN echo "StanfordNLP" && \
     -annotators tokenize \
     -tokenize.language=german \
     -file example.txt
+
+
+##################
+# Install Cutter #
+##################
+
+RUN pip3 install cutter-ng
+
+COPY cutter /euralex/cutter/
+
+RUN echo "Cutter\n" && python3 ./cutter/cutter.py nosent example.txt
 
 
 #################
