@@ -59,6 +59,10 @@ my %tools = (
     my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
     system 'python3 ./spacy/spacy_tok.py ' . $raw . ' > ' . $empirist_path . $_[1] . '/spacy/' . $_[0];
   },
+  cutter => sub {
+    my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
+    system 'python3 ./cutter/cutter.py nosent ' . $raw . ' > ' . $empirist_path . $_[1] . '/cutter/' . $_[0];
+  },
   stanford => sub {
     my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
     system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
@@ -80,6 +84,7 @@ my %tools = (
 # delete $tools{stanford};
 # delete $tools{spacy};
 # delete $tools{elephant};
+# delete $tools{cutter};
 
 # Create project folders
 foreach (keys %tools) {

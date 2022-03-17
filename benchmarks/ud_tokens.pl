@@ -52,6 +52,9 @@ my %tools = (
   spacy => sub {
     system 'python3 ./spacy/spacy_tok.py ' . $raw . ' > ' . $ud_path . '/spacy/' . $base;
   },
+  cutter => sub {
+    system 'python3 ./cutter/cutter.py nosent ' . $raw . ' > ' . $ud_path . '/cutter/' . $base;
+  },
   somajo => sub {
     system 'somajo-tokenizer ' . $raw . ' 2> /dev/null > ' . $ud_path . '/somajo/' . $base;
   },
@@ -75,6 +78,7 @@ my %tools = (
 # delete $tools{stanford};
 # delete $tools{elephant};
 # delete $tools{spacy};
+# delete $tools{cutter};
 
 # Create project folders
 foreach (keys %tools) {

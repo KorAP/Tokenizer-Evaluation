@@ -33,7 +33,10 @@ The supported benchmark scripts are:
 ## `benchmark.pl`
 
 Performance measurements of the tools. See the tools section for some
-remarks to take into account.
+remarks to take into account. Accepts two numerical parameters:
+
+- The duplication count of the example file
+- The number of iterations
 
 
 ## `empirist.pl`
