@@ -9,6 +9,7 @@ my $file = $ARGV[0];
 open(X, '<' . $file);
 open(RAW, '>' . $file . '.raw');
 open(SPLIT, '>' . $file . '.split');
+open(EOS, '>' . $file . '.eos');
 
 my $init;
 
@@ -21,6 +22,9 @@ while(!eof(X)) {
       print RAW ' ';
     };
     print RAW $1;
+    my $temp = $1;
+    $temp =~ s/[\s\n\t]+//g;
+    print EOS $temp, "\n";
   }
   elsif (m/^\d+[\s\t]/) {
     if (/^\d+[\s\t]+([^\t\s]+)[\t\s]/) {
@@ -32,4 +36,5 @@ while(!eof(X)) {
 
 close(X);
 close(RAW);
+close(EOS);
 close(SPLIT);

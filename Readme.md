@@ -63,9 +63,9 @@ output folders
 -v ${PWD}/output_web:/euralex/empirist_web
 ```
 
-## `ud-tokens.pl`
+## `ud_tokens.pl`
 
-To run the evaluation suite against the 
+To run the token evaluation suite against the 
 [Universal Dependency](https://github.com/UniversalDependencies/UD_German-GSD)
 corpus, first install the empirist tooling as explained above,
 and download the corpus.
@@ -75,13 +75,10 @@ $ wget https://github.com/UniversalDependencies/UD_German-GSD/raw/master/de_gsd-
   -O corpus/de_gsd-ud-train.conllu
 ```
 
+## `ud_sentences.pl`
 
-```shell
-$ docker run --rm -it \
-  -v ${PWD}/benchmarks:/euralex/benchmarks \
-  -v ${PWD}/corpus:/euralex/corpus \
-  korap/euralex2 benchmarks/empirist.pl
-```
+To run the sentence evaluation suite, first download the corpus
+as explained above.
 
 
 # Tools

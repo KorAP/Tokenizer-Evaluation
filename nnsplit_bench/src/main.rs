@@ -15,7 +15,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let splits = &splitter.split(&input)[0];
 
     for sentence in splits.iter() {
-        println!("{}", sentence.text());
+        println!("{}</eos>", sentence.text());
     }
 
     Ok(())

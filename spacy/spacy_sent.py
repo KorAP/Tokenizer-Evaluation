@@ -24,4 +24,4 @@ with open(sys.argv[2], 'r') as f:
 
     for sent in doc.sents:
         print(sent.text)
-        print("</eos>")
+        print(" </eos> ")
