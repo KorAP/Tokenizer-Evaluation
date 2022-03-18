@@ -4,7 +4,6 @@ use warnings;
 
 # Comparison path
 my $cmd = '/euralex/corpus/empirist_gold_cmc/tools/compare_tokenization.perl';
-# my $cmd = '/euralex/corpus/deep-eos/eval.py';
 
 my $cleanup = 'perl /euralex/benchmarks/cleanup/';
 my $tokenize_eos = $cleanup . 'tokenize_eos.pl';
@@ -18,11 +17,11 @@ my $base = 'de_gsd-ud-train.conllu';
 
 # Split files
 chdir '/euralex/corpus/';
-system 'perl /euralex/benchmarks/cleanup/split_conllu.pl /euralex/corpus/' . $base;
+system 'perl /euralex/benchmarks/cleanup/split_conllu.pl /euralex/corpus/' . $base . ' ' . $ud_path;
 chdir '/euralex';
 
-my $gold = '/euralex/corpus/' . $base . '.eos';
-my $raw = '/euralex/corpus/' . $base . '.raw';
+my $gold = $ud_path . '/' . $base . '.eos';
+my $raw = $ud_path . '/' . $base . '.raw';
 
 my %tools = (
   waste => sub {

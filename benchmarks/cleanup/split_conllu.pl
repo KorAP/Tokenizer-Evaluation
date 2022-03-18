@@ -5,11 +5,19 @@ use warnings;
 our @ARGV;
 
 my $file = $ARGV[0];
+my $file_name = $file;
+$file_name =~ s!^.+?/([^/]+?)$!$1!;
+
+
+my $out = $ARGV[1];
 
 open(X, '<' . $file);
-open(RAW, '>' . $file . '.raw');
-open(SPLIT, '>' . $file . '.split');
-open(EOS, '>' . $file . '.eos');
+unlink $file . '.raw';
+open(RAW, '>' . $out . '/' . $file_name . '.raw') or die $!;
+unlink $file . '.split';
+open(SPLIT, '>' . $out . '/' . $file_name . '.split') or die $!;
+unlink $file . '.eos';
+open(EOS, '>' . $out . '/' . $file_name . '.eos') or die $!;
 
 my $init;
 
