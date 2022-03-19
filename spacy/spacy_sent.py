@@ -20,8 +20,10 @@ elif model == 'sentencizer':
 with open(sys.argv[2], 'r') as f:
     contents = f.read()
 
-    doc = nlp(contents)
+    nlp.max_length = len(contents) + 100
 
+    doc = nlp(contents, disable = ['ner'])
+    
     for sent in doc.sents:
         print(sent.text)
         print(" </eos> ")
