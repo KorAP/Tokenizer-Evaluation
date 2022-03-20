@@ -223,11 +223,22 @@ RUN echo "StanfordNLP" && \
 # Install Cutter #
 ##################
 
-RUN pip3 install cutter-ng
+RUN pip3 install cutter-ng==2.5
 
 COPY cutter /euralex/cutter/
 
 RUN echo "Cutter\n" && python3 ./cutter/cutter.py nosent example.txt
+
+
+#####################
+# Install BlingFire #
+#####################
+
+RUN pip3 install -U blingfire==0.1.8
+
+COPY blingfire /euralex/blingfire/
+
+RUN echo "BlingFire\n" && python3 ./blingfire/blingfire_tok.py example.txt
 
 
 #################

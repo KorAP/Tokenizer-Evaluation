@@ -13,11 +13,11 @@ my $base = 'de_gsd-ud-train.conllu';
 
 # Split files
 chdir '/euralex/corpus/';
-system 'perl /euralex/benchmarks/cleanup/split_conllu.pl /euralex/corpus/' . $base;
+system 'perl /euralex/benchmarks/cleanup/split_conllu.pl /euralex/corpus/' . $base . ' ' . $ud_path;
 chdir '/euralex';
 
-my $gold = '/euralex/corpus/' . $base . '.split';
-my $raw = '/euralex/corpus/' . $base . '.raw';
+my $gold = $ud_path . '/' . $base . '.split';
+my $raw = $ud_path . '/' . $base . '.raw';
 
 my %tools = (
   waste => sub {
@@ -52,6 +52,9 @@ my %tools = (
   spacy => sub {
     system 'python3 ./spacy/spacy_tok.py ' . $raw . ' > ' . $ud_path . '/spacy/' . $base;
   },
+  blingfire => sub {
+    system 'python3 ./blingfire/blingfire_tok.py ' . $raw . ' | sed "s/\s/\n/g" > ' . $ud_path . '/blingfire/' . $base;
+  },
   cutter => sub {
     system 'python3 ./cutter/cutter.py nosent ' . $raw . ' > ' . $ud_path . '/cutter/' . $base;
   },
@@ -79,6 +82,7 @@ my %tools = (
 # delete $tools{elephant};
 # delete $tools{spacy};
 # delete $tools{cutter};
+# delete $tools{blingfire};
 
 # Create project folders
 foreach (keys %tools) {

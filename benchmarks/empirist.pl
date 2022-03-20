@@ -59,6 +59,10 @@ my %tools = (
     my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
     system 'python3 ./spacy/spacy_tok.py ' . $raw . ' > ' . $empirist_path . $_[1] . '/spacy/' . $_[0];
   },
+  blingfire => sub {
+    my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
+    system 'python3 ./blingfire/blingfire_tok.py ' . $raw . ' | sed "s/\s/\n/g" > ' . $empirist_path . $_[1] . '/blingfire/' . $_[0];
+  },
   cutter => sub {
     my $raw = $gold_path . $_[1] . '/raw/' . $_[0];
     system 'python3 ./cutter/cutter.py nosent ' . $raw . ' > ' . $empirist_path . $_[1] . '/cutter/' . $_[0];
@@ -72,19 +76,20 @@ my %tools = (
   }
 );
 
-# delete $tools{waste};
-# delete $tools{datok};
-# delete $tools{korap_tokenizer};
-# delete $tools{opennlp_simple};
-# delete $tools{opennlp_tokenizer};
-# delete $tools{tree_tagger};
-# delete $tools{jtok};
-# delete $tools{syntok};
-# delete $tools{somajo};
-# delete $tools{stanford};
-# delete $tools{spacy};
-# delete $tools{elephant};
-# delete $tools{cutter};
+delete $tools{waste};
+delete $tools{datok};
+delete $tools{korap_tokenizer};
+delete $tools{opennlp_simple};
+delete $tools{opennlp_tokenizer};
+delete $tools{tree_tagger};
+delete $tools{jtok};
+delete $tools{syntok};
+delete $tools{somajo};
+delete $tools{stanford};
+delete $tools{spacy};
+delete $tools{elephant};
+delete $tools{cutter};
+delete $tools{blingfire};
 
 # Create project folders
 foreach (keys %tools) {

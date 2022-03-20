@@ -101,6 +101,12 @@ my $models = {
   cutter => sub {
     system 'python3 ./cutter/cutter.py nosent ./corpus/'.$FILE.' > /dev/null'
   },
+  blingfire_tok => sub {
+    system 'python3 ./blingfire/blingfire_tok.py ./corpus/'.$FILE.' > /dev/null'
+  },
+  blingfire_sent => sub {
+    system 'python3 ./blingfire/blingfire_sent.py ./corpus/'.$FILE.' > /dev/null'
+  },
   spacy_tok => sub {
     system 'python3 ./spacy/spacy_tok.py ./corpus/'.$FILE.' > /dev/null'
   },
@@ -135,36 +141,38 @@ my $models = {
   },
 };
 
-delete $models->{'SoMaJo'};
-delete $models->{'SoMaJo_p2'};
-delete $models->{'SoMaJo_p4'};
-delete $models->{'SoMaJo_p8'};
-delete $models->{'Datok_matok'};
-delete $models->{'Datok_datok'};
-delete $models->{'OpenNLP_Simple'};
-delete $models->{'OpenNLP_Tokenizer_de-ud-gsd'};
-delete $models->{'OpenNLP_Sentence_de-ud-gsd'};
-delete $models->{'TreeTagger'};
-delete $models->{'deep-eos_bi-lstm-de'};
-delete $models->{'deep-eos_cnn-de'};
-delete $models->{'deep-eos_lstm-de'};
-delete $models->{'JTok'};
-delete $models->{'KorAP-Tokenizer'};
-delete $models->{'Syntok_tokenizer'};
-delete $models->{'Syntok_segmenter'};
-delete $models->{'Waste'};
-delete $models->{'nnsplit'};
-delete $models->{'elephant'};
-delete $models->{'Stanford'};
-delete $models->{'Stanford_t2'};
-delete $models->{'Stanford_t4'};
-delete $models->{'Stanford_t8'};
+#delete $models->{'SoMaJo'};
+#delete $models->{'SoMaJo_p2'};
+#delete $models->{'SoMaJo_p4'};
+#delete $models->{'SoMaJo_p8'};
+#delete $models->{'Datok_matok'};
+#delete $models->{'Datok_datok'};
+#delete $models->{'OpenNLP_Simple'};
+#delete $models->{'OpenNLP_Tokenizer_de-ud-gsd'};
+#delete $models->{'OpenNLP_Sentence_de-ud-gsd'};
+#delete $models->{'TreeTagger'};
+#delete $models->{'deep-eos_bi-lstm-de'};
+#delete $models->{'deep-eos_cnn-de'};
+#delete $models->{'deep-eos_lstm-de'};
+#delete $models->{'JTok'};
+#delete $models->{'KorAP-Tokenizer'};
+#delete $models->{'Syntok_tokenizer'};
+#delete $models->{'Syntok_segmenter'};
+#delete $models->{'Waste'};
+#delete $models->{'nnsplit'};
+#delete $models->{'elephant'};
+#delete $models->{'Stanford'};
+#delete $models->{'Stanford_t2'};
+#delete $models->{'Stanford_t4'};
+#delete $models->{'Stanford_t8'};
 #delete $models->{'Stanford_tokonly'};
 #delete $models->{'cutter'};
 #delete $models->{'spacy_tok'};
 #delete $models->{'spacy_sentencizer'};
 #delete $models->{'spacy_dep'};
 #delete $models->{'spacy_stat'};
+#delete $models->{'blingfire_tok'};
+#delete $models->{'blingfire_sent'};
 
 
 

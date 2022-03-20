@@ -8,6 +8,7 @@ my $cmd = '/euralex/corpus/empirist_gold_cmc/tools/compare_tokenization.perl';
 my $cleanup = 'perl /euralex/benchmarks/cleanup/';
 my $tokenize_eos = $cleanup . 'tokenize_eos.pl';
 my $tokenize_nn = $cleanup . 'tokenize_nn.pl';
+my $tokenize_simple = $cleanup . 'tokenize_simple.pl';
 
 # Output path
 my $ud_path = '/euralex/ud_eos';
@@ -45,7 +46,7 @@ my %tools = (
     chdir '/euralex';
   },
   syntok => sub {
-    system 'python3 -m syntok.segmenter ' . $raw . ' | ' . $cleanup . '/tokenize_simple.pl > ' . $ud_path . '/syntok/' . $base;
+    system 'python3 -m syntok.segmenter ' . $raw . ' | ' . $tokenize_simple . ' > ' . $ud_path . '/syntok/' . $base;
   },
   somajo => sub {
     system 'somajo-tokenizer --split_sentences ' . $raw . ' 2> /dev/null | ' . $tokenize_nn . ' > ' . $ud_path . '/somajo/' . $base;
@@ -68,6 +69,9 @@ my %tools = (
   spacy_sentencizer => sub {
     system 'python3 ./spacy/spacy_sent.py sentencizer ' . $raw . ' | ' . $tokenize_eos . ' > ' . $ud_path . '/spacy_sentencizer/' . $base
   },
+  blingfire => sub {
+    system 'python3 ./blingfire/blingfire_sent.py ' . $raw . ' | ' . $tokenize_simple . ' > ' . $ud_path . '/blingfire/' . $base;
+  },
   'deep-eos_bi-lstm-de' => sub {
     system 'python3 ./deep-eos/main.py --input-file '.$raw.' --model-filename ./deep-eos/bi-lstm-de.model --vocab-filename ./deep-eos/bi-lstm-de.vocab --eos-marker "</eos>" tag | ' . $tokenize_eos . ' > ' . $ud_path . '/deep-eos_bi-lstm-de/' . $base;
   },
@@ -80,22 +84,23 @@ my %tools = (
 );
 
 
-#delete $tools{waste};
-#delete $tools{datok};
-#delete $tools{korap_tokenizer};
-#delete $tools{'opennlp_sentence'};
-#delete $tools{jtok};
-#delete $tools{syntok};
-#delete $tools{somajo};
-#delete $tools{stanford};
-#delete $tools{nnsplit};
-#delete $tools{'deep-eos_bi-lstm-de'};
-#delete $tools{'deep-eos_cnn-de'};
-#delete $tools{'deep-eos_lstm-de'};
-#delete $tools{'spacy_dep'};
-#delete $tools{'spacy_stat'};
-#delete $tools{'spacy_sentencizer'};
-#delete $tools{'cutter'};
+# delete $tools{waste};
+# delete $tools{datok};
+# delete $tools{korap_tokenizer};
+# delete $tools{'opennlp_sentence'};
+# delete $tools{jtok};
+# delete $tools{syntok};
+# delete $tools{somajo};
+# delete $tools{stanford};
+# delete $tools{nnsplit};
+# delete $tools{'deep-eos_bi-lstm-de'};
+# delete $tools{'deep-eos_cnn-de'};
+# delete $tools{'deep-eos_lstm-de'};
+# delete $tools{'spacy_dep'};
+# delete $tools{'spacy_stat'};
+# delete $tools{'spacy_sentencizer'};
+# delete $tools{'blingfire'};
+# delete $tools{'cutter'};
 
 
 # Create project folders
