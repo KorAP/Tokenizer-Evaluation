@@ -23,7 +23,7 @@ RUN echo "WC\n" && wc -w ./example.txt
 RUN apt-get install -y python3-dev \
     python3 \
     python3-pip && \
-    pip3 install SoMaJo
+    pip3 install SoMaJo==2.2.0
 
 RUN echo "SOMAJO\n" && somajo-tokenizer --split_sentences ./example.txt
 
@@ -186,7 +186,7 @@ RUN echo "Elephant-Wrapper" && ./elephant-wrapper/bin/tokenize.sh -i example.txt
 # Install SpaCy #
 #################
 
-RUN pip3 install -U spacy
+RUN pip3 install -U spacy==3.2.3
 
 COPY spacy /euralex/spacy/
 
