@@ -113,6 +113,12 @@ docker run --privileged -v
 - [NNSplit](https://bminixhofer.github.io/nnsplit/) is a machine-trained approach based on a byte-level LSTM neural network.
 
 
+## Results
+
+
+In terms of speed, the native output of the tools was measured, while in terms of accuracy, further reshaping was necessary to make it comparable to the gold standard.
+
+
 ## Literature
 
 - Beesley, K. R./Karttunen, L. (2003): Finite State Morphology. CSLI Publications.
