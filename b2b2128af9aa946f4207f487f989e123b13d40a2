@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d522bc4_204a6b59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-03-24T10:08:46Z",
+      "side": 1,
+      "message": "Because this would require a complete rebuild on the servers, I will postpone this patch.",
+      "revId": "b2b2128af9aa946f4207f487f989e123b13d40a2",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
