@@ -186,7 +186,8 @@ RUN echo "Elephant-Wrapper" && ./elephant-wrapper/bin/tokenize.sh -i example.txt
 # Install SpaCy #
 #################
 
-RUN pip3 install -U spacy==3.2.3
+RUN pip3 install click==8.0.4 && \
+    pip3 install -U spacy==3.2.3
 
 COPY spacy /euralex/spacy/
 
