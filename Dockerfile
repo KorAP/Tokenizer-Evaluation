@@ -245,10 +245,10 @@ RUN echo "BlingFire\n" && python3 ./blingfire/blingfire_tok.py example.txt
 # Install Datok #
 #################
 
-RUN wget https://github.com/KorAP/Datok/archive/refs/tags/v0.1.1.zip && \
-    unzip v0.1.1.zip && \
-    rm v0.1.1.zip && \
-    mv Datok-0.1.1 Datok && \
+RUN wget https://github.com/KorAP/Datok/archive/refs/tags/v0.1.5.zip && \
+    unzip v0.1.5.zip && \
+    rm v0.1.5.zip && \
+    mv Datok-0.1.5 Datok && \
     cd Datok && \
     go build ./cmd/datok.go
 
