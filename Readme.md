@@ -33,6 +33,16 @@ remarks to take into account. Accepts two numerical parameters:
 - The duplication count of the example file
 - The number of iterations
 
+### `benchmark_batches.pl`
+
+Performance measurements of the tools. See the tools section for some
+remarks to take into account. Accepts one numerical parameter:
+
+- The number of iterations
+
+Will check batches of `1000`, `2000`, `4000`, `8000` ... `8192000`
+tokens against all tools.
+
 ### `empirist.pl`
 
 To run the empirist evaluation suite, you first need to download
