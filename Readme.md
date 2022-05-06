@@ -1,4 +1,4 @@
-# EURALEX 2022 - Tokenization Benchmark
+# Tokenization Benchmark
 
 This repository contains benchmark scripts for comparing different tokenizers and sentence segmenters of German.  For trouble-free testing, all tools are provided in a Dockerfile.
 
@@ -7,7 +7,7 @@ This repository contains benchmark scripts for comparing different tokenizers an
 To build the Docker image, run
 
 ```shell
-$ docker build -f Dockerfile -t korap/euralex22 .
+$ docker build -f Dockerfile -t korap/tokenbench .
 ```
 This will create and install an image of approximately 12GB.
 
@@ -18,9 +18,9 @@ To run the benchmark, call
 
 ```shell
 $ docker run --rm -i \
-  -v ${PWD}/benchmarks:/euralex/benchmarks \
-  -v ${PWD}/corpus:/euralex/corpus \
-  korap/euralex22 benchmarks/[BENCHMARK-SCRIPT]
+  -v ${PWD}/benchmarks:/tokenbench/benchmarks \
+  -v ${PWD}/corpus:/tokenbench/corpus \
+  korap/tokenbench benchmarks/[BENCHMARK-SCRIPT]
 ```
 
 The supported benchmark scripts are:
@@ -61,8 +61,8 @@ To investigate the output, start the benchmark with mounted
 output folders
 
 ```
--v ${PWD}/output_cmc:/euralex/empirist_cmc
--v ${PWD}/output_web:/euralex/empirist_web
+-v ${PWD}/output_cmc:/tokenbench/empirist_cmc
+-v ${PWD}/output_web:/tokenbench/empirist_web
 ```
 
 ### `ud_tokens.pl`
@@ -124,7 +124,6 @@ docker run --privileged -v
 
 
 ## Results
-
 
 In terms of speed, the native output of the tools was measured, while in terms of accuracy, further reshaping was necessary to make it comparable to the gold standard.
 
