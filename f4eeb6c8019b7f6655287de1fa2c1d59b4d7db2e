@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dafb1cbb_cafa6aa7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-05-06T09:37:38Z",
+      "side": 1,
+      "message": "I think we can publish this under github.com/korap/tokenizer-evaluation.\nI will add the result section in a separate commit.",
+      "revId": "f4eeb6c8019b7f6655287de1fa2c1d59b4d7db2e",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    }
+  ]
+}
