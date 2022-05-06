@@ -34,6 +34,24 @@
       "parentUuid": "dafb1cbb_cafa6aa7",
       "revId": "f4eeb6c8019b7f6655287de1fa2c1d59b4d7db2e",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "279b9dbd_a7226f0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-05-06T09:58:56Z",
+      "side": 1,
+      "message": "/KorAP/Tokenizer-Evaluation 👍",
+      "parentUuid": "d5d8588e_bf7ca6e5",
+      "revId": "f4eeb6c8019b7f6655287de1fa2c1d59b4d7db2e",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
