@@ -1,6 +1,6 @@
 FROM --platform=linux/amd64 debian:bookworm-slim
 
-WORKDIR /euralex
+WORKDIR /tokenbench
 
 RUN echo "Dies ist ein Test. Also, nur ein Beispiel." > example.txt
 
@@ -108,7 +108,7 @@ RUN wget https://github.com/DFKI-MLT/JTok/archive/refs/tags/v2.1.19.zip && \
 
 RUN echo "JTok\n" && \
     cd ./JTok/bin && \
-    sh tokenize /euralex/example.txt de
+    sh tokenize /tokenbench/example.txt de
 
 
 ##################
@@ -136,7 +136,7 @@ RUN cd ./Waste/moot-2.0.20-1 && \
     make && \
     make install && \
     ldconfig && \
-    echo "abbrevs /euralex/Waste/de-dstar-dtiger/abbr.lex\nstopwords /euralex/Waste/de-dstar-dtiger/stop.lex\nconjunctions /euralex/Waste/de-dstar-dtiger/conj.lex\nmodel /euralex/Waste/de-dstar-dtiger/model.hmm" > /euralex/Waste/waste.rc
+    echo "abbrevs /tokenbench/Waste/de-dstar-dtiger/abbr.lex\nstopwords /tokenbench/Waste/de-dstar-dtiger/stop.lex\nconjunctions /tokenbench/Waste/de-dstar-dtiger/conj.lex\nmodel /tokenbench/Waste/de-dstar-dtiger/model.hmm" > /tokenbench/Waste/waste.rc
 
 RUN echo "Waste\n" && cat ./example.txt | waste -N --rcfile=./Waste/waste.rc
 
@@ -145,7 +145,7 @@ RUN echo "Waste\n" && cat ./example.txt | waste -N --rcfile=./Waste/waste.rc
 # Install nnsplit #
 ###################
 
-COPY nnsplit_bench /euralex/nnsplit_bench/
+COPY nnsplit_bench /tokenbench/nnsplit_bench/
 
 RUN apt-get update && apt-get install -y cargo
 
@@ -189,7 +189,7 @@ RUN echo "Elephant-Wrapper" && ./elephant-wrapper/bin/tokenize.sh -i example.txt
 RUN pip3 install click==8.0.4 && \
     pip3 install -U spacy==3.2.3
 
-COPY spacy /euralex/spacy/
+COPY spacy /tokenbench/spacy/
 
 RUN echo "SpaCy" && python3 ./spacy/spacy_tok.py example.txt
 
@@ -214,7 +214,7 @@ RUN unzip stanford-corenlp-latest.zip && \
 
 # Run with threads!
 RUN echo "StanfordNLP" && \
-    CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP \
+    CLASSPATH=/tokenbench/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP \
     -annotators tokenize \
     -tokenize.language=german \
     -file example.txt
@@ -226,7 +226,7 @@ RUN echo "StanfordNLP" && \
 
 RUN pip3 install cutter-ng==2.5
 
-COPY cutter /euralex/cutter/
+COPY cutter /tokenbench/cutter/
 
 RUN echo "Cutter\n" && python3 ./cutter/cutter.py nosent example.txt
 
@@ -237,7 +237,7 @@ RUN echo "Cutter\n" && python3 ./cutter/cutter.py nosent example.txt
 
 RUN pip3 install -U blingfire==0.1.8
 
-COPY blingfire /euralex/blingfire/
+COPY blingfire /tokenbench/blingfire/
 
 RUN echo "BlingFire\n" && python3 ./blingfire/blingfire_tok.py example.txt
 
@@ -268,18 +268,18 @@ RUN mkdir KorAP-Tokenizer && \
 RUN echo "KorAP-Tokenizer\n" && cat example.txt | java -jar KorAP-Tokenizer/KorAP-Tokenizer.jar -l de -s -
 
 
-RUN useradd -ms /bin/bash euralex
+RUN useradd -ms /bin/bash tokenbench
 
 RUN rm -r ./nnsplit_bench && \
-    rm /euralex/v0.1.zip
+    rm /tokenbench/v0.1.zip
 
-RUN chown euralex:euralex -R /euralex
+RUN chown tokenbench:tokenbench -R /tokenbench
 
-USER euralex
+USER tokenbench
 
-WORKDIR /euralex
+WORKDIR /tokenbench
 
 ENTRYPOINT [ "perl" ]
 
 LABEL maintainer="korap@ids-mannheim.de"
-LABEL description="Tokenizer evaluation for EURALEX"
+LABEL description="Tokenizer evaluation"
