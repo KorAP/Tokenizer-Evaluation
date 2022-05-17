@@ -1,4 +1,4 @@
-# Tokenization Benchmark
+# Tokenizer Evaluation
 
 This repository contains benchmark scripts for comparing different tokenizers and sentence segmenters of German.  For trouble-free testing, all tools are provided in a Dockerfile.
 
@@ -27,7 +27,12 @@ The supported benchmark scripts are:
 
 ### `benchmark.pl`
 
-Performance measurements of the tools. See the tools section for some
+Performance measurements of the tools.
+For the benchmarking, the novel "Effi Briest"
+by Theodor Fontane in the
+[Project Gutenberg version](https://www.gutenberg.org/ebooks/5323)
+was used (with a total of 98,207 tokens according to `wc -l`).
+See the tools section for some
 remarks to take into account. Accepts two numerical parameters:
 
 - The duplication count of the example file
@@ -125,8 +130,46 @@ docker run --privileged -v
 
 ## Results
 
-In terms of speed, the native output of the tools was measured, while in terms of accuracy, further reshaping was necessary to make it comparable to the gold standard.
+Overview of all compared tools and models with their performance measures.
 
+In terms of speed, the native output of the tools was measured,
+while in terms of accuracy, further reshaping was necessary to make
+it comparable to the gold standard. See the tools section for further caveats.
+
+The measures correspond to the average value of 100 runs of `benchmark.pl`. Since the length of a text can have an impact on performance, a tenfold concatenation of the text was also tested. The test system was an Intel Xeon CPU E5-2630 v2 @ 2.60GHz with 12 cores and 64 GB of RAM
+
+| Tool | V. | Model | UD-GSD (Tokens) F1 | Empirist-CMC F1 | Empirist-Web F1 | UD-GSD (Sentences) F1 | 1 x Effi (T/ms) | 10 x Effi (T/ms) |
+|:---|:---:|:---|----:|----:|----:|----:|----:|----:|
+|**KorAP-Tokenizer**|2.2.2| |99.45|99.06|99.27|96.87|72.90|199.28|
+|**Datok**|0.1.5|datok|99.45|98.79|99.21|97.60|614.72|2304.13|
+|"|"|matok|"|"|"|"|1041.63|2798.78|
+|**BlingFire**|0.1.8|wbd.bin|99.25|55.85|95.80|-|431.92|1697.73|
+|"|"|sbd.bin|-|-|-|95.90|417.10|1908.87|
+|**Cutter**|2.5| |99.47|96.24|99.38|97.31|0.38|-\*|
+|**JTok**|2.1.19| | 99.56|58.44|98.09|97.92|31.19|117.22|
+|**OpenNLP**|1.9.4|Simple|95.70|55.26|91.69|-|290.71|1330.23|
+|"|"|Tokenizer (de-ud-gsd)|99.67|65.22|97.58|-|74.65|145.08|
+|"|"|SentenceDetector (de-ud-gsd)|-|-|-|98.51|247.84|853.01|
+|**SoMaJo**|2.2.0|p=1|99.46|99.21|99.87|97.05|8.15|8.41|
+|"|"|p=8|"|"|"|"|27.32|39.91|
+|**SpaCy**|3.2.3|Tokenizer|99.49|69.94|98.29|-|19.73|44.40|
+|"|"|Sentencizer|-|-|-|96.80|16.94|40.58|
+|"|"|Statistical|-|-|-|97.16|4.90|10.01|
+|"|"|Dependency|-|-|-|96.93|2.24|0.48|
+|**Stanford**|4.4.0|tokenize|99.93|97.71|98.46|-|75.47|156.24|
+|"|"|tokenize,split,mwt|"|"|"|98.22|46.95|91.56|
+|**Syntok**|1.4.3|Tokenizer|99.41|70.76|97.50|-|103.90|108.40|
+|"|"|Segmenter|-|-|-|97.50|59.66|61.07|
+|**Waste**|2.0.20-1| |99.55|65.90|98.49|97.46|141.07|144.95|
+|**Elephant**|0.2.3| |99.62|66.96|97.88|-|8.57|8.68|
+|**TreeTagger**|3.2.4| |99.52|95.58|99.27|-|69.92|72.98|
+|**Deep-EOS**|0.1|bi-lstm-de|-|-|-|97.47|0.25**|0.24**|
+|"|"|cnn-de|-|-|-|97.49|0.27**|0.25**|
+|"|"|lstm-de|-|-|-|97.47|0.29**|0.27**|
+|**NNSplit**|0.5.8| |-|-|-|95.55|0.90**|0.90**|
+
+* Did not finish on the test machine.
+** No GPU acceleration tested.
 
 ## Literature
 
