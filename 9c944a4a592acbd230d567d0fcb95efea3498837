@@ -16,6 +16,23 @@
       "message": "I just right aligned the numbers in the table. Hope you didn\u0027t center them on purpose...",
       "revId": "9c944a4a592acbd230d567d0fcb95efea3498837",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b16c35ec_945b7afd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2022-05-18T20:07:40Z",
+      "side": 1,
+      "message": "Yes, I centered them on purpose, but I like the right alignment. Maybe the *-symbols should even be leading instead of trailing.",
+      "revId": "9c944a4a592acbd230d567d0fcb95efea3498837",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
