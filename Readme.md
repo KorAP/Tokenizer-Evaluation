@@ -2,6 +2,11 @@
 
 This repository contains benchmark scripts for comparing different tokenizers and sentence segmenters of German.  For trouble-free testing, all tools are provided in a Dockerfile.
 
+This work will be presented at [EURALEX 2022](https://euralex2022.ids-mannheim.de/). Please cite as:
+
+> Diewald, N./Kupietz, M./Lüngen, H. (2022): *Tokenizing on scale - Preprocessing large text corpora on the lexical and sentence level*.
+> In: Proceedings of EURALEX 2022. Mannheim, Germany.
+
 ## Creating the container
 
 To build the Docker image, run
