@@ -76,9 +76,9 @@ my $models = {
     system 'python3 ./deep-eos/main.py --input-file ./corpus/'.$FILE.' --model-filename ./deep-eos/lstm-de.model --vocab-filename ./deep-eos/lstm-de.vocab --eos-marker "§" tag > /dev/null';
   },
   'JTok' => sub {
-    chdir '/euralex/JTok/bin';
+    chdir '/tokenbench/JTok/bin';
     system 'sh tokenize ../../corpus/'.$FILE.' de > /dev/null';
-    chdir '/euralex';
+    chdir '/tokenbench';
   },
   'KorAP-Tokenizer' => sub {
     system 'cat ./corpus/'.$FILE.' | java -jar ./KorAP-Tokenizer/KorAP-Tokenizer.jar -l de -s > /dev/null'
@@ -120,23 +120,23 @@ my $models = {
     system 'python3 ./spacy/spacy_sent.py sentencizer ./corpus/'.$FILE.' > /dev/null'
   },
   Stanford => sub {
-    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+    system 'CLASSPATH=/tokenbench/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
       '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -file ./corpus/' . $FILE
   },
   Stanford_t2 => sub {
-    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+    system 'CLASSPATH=/tokenbench/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
       '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -threads=2 -file ./corpus/' . $FILE
     },
   Stanford_t4 => sub {
-    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+    system 'CLASSPATH=/tokenbench/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
       '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -threads=4 -file ./corpus/' . $FILE
     },
   Stanford_t8 => sub {
-    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+    system 'CLASSPATH=/tokenbench/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
       '-props german -annotators tokenize,ssplit,mwt -tokenize.language=german -threads=8 -file ./corpus/' . $FILE
     },
   Stanford_tokonly => sub {
-    system 'CLASSPATH=/euralex/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
+    system 'CLASSPATH=/tokenbench/stanford-corenlp-4.4.0/* java edu.stanford.nlp.pipeline.StanfordCoreNLP ' .
       '-props german -annotators tokenize -tokenize.language=german -file ./corpus/' . $FILE
   },
 };
