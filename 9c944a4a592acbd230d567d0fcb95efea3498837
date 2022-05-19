@@ -33,6 +33,24 @@
       "message": "Yes, I centered them on purpose, but I like the right alignment. Maybe the *-symbols should even be leading instead of trailing.",
       "revId": "9c944a4a592acbd230d567d0fcb95efea3498837",
       "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97d048e7_94d5e035",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2022-05-19T06:13:29Z",
+      "side": 1,
+      "message": "Exactly what I thought (not important though)",
+      "parentUuid": "b16c35ec_945b7afd",
+      "revId": "9c944a4a592acbd230d567d0fcb95efea3498837",
+      "serverId": "626241b7-b7d0-4197-b843-1ee23887649c"
     }
   ]
 }
