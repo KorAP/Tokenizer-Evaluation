@@ -2,6 +2,8 @@
 /corpus/de_*-ud-train*
 /sandbox
 /Sandbox
+/charts/*.pdf
+/charts/*.png
 /output_*
 /corpus/*.txt
 \#*
