@@ -150,7 +150,7 @@ The measures correspond to the average value of 100 runs of `benchmark.pl`. Sinc
 |"|"|matok|"|"|"|"|1041.63|2798.78|
 |**BlingFire**|0.1.8|wbd.bin|99.25|55.85|95.80|-|431.92|1697.73|
 |"|"|sbd.bin|-|-|-|95.90|417.10|1908.87|
-|**Cutter**|2.5| |99.47|96.24|99.38|97.31|0.38|-\*|
+|**Cutter**|2.5| |99.47|96.24|99.38|97.31|0.38|\*-|
 |**JTok**|2.1.19| | 99.56|58.44|98.09|97.92|31.19|117.22|
 |**OpenNLP**|1.9.4|Simple|95.70|55.26|91.69|-|290.71|1330.23|
 |"|"|Tokenizer (de-ud-gsd)|99.67|65.22|97.58|-|74.65|145.08|
@@ -168,13 +168,14 @@ The measures correspond to the average value of 100 runs of `benchmark.pl`. Sinc
 |**Waste**|2.0.20-1| |99.55|65.90|98.49|97.46|141.07|144.95|
 |**Elephant**|0.2.3| |99.62|66.96|97.88|-|8.57|8.68|
 |**TreeTagger**|3.2.4| |99.52|95.58|99.27|-|69.92|72.98|
-|**Deep-EOS**|0.1|bi-lstm-de|-|-|-|97.47|0.25**|0.24**|
-|"|"|cnn-de|-|-|-|97.49|0.27**|0.25**|
-|"|"|lstm-de|-|-|-|97.47|0.29**|0.27**|
-|**NNSplit**|0.5.8| |-|-|-|95.55|0.90**|0.90**|
+|**Deep-EOS**|0.1|bi-lstm-de|-|-|-|97.47|\*\*0.25|\*\*0.24|
+|"|"|cnn-de|-|-|-|97.49|\*\*0.27|\*\*0.25|
+|"|"|lstm-de|-|-|-|97.47|\*\*0.29|\*\*0.27|
+|**NNSplit**|0.5.8| |-|-|-|95.55|\*\*0.90|\*\*0.90|
 
-* Did not finish on the test machine.
-** No GPU acceleration tested.
+\* Did not finish on the test machine.
+
+\*\* No GPU acceleration tested.
 
 ## Literature
 
