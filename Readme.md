@@ -177,6 +177,10 @@ The measures correspond to the average value of 100 runs of `benchmark.pl`. Sinc
 
 \*\* No GPU acceleration tested.
 
+### Result chart
+
+![Tokenizer performance chart](https://user-images.githubusercontent.com/11092081/169690936-2e5df3c8-bdd3-4c91-bea8-8c8d6800c194.svg)
+
 ## Literature
 
 - Beesley, K. R./Karttunen, L. (2003): Finite State Morphology. CSLI Publications.
